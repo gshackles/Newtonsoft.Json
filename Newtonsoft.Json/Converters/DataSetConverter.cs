@@ -23,7 +23,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
 using System;
 using System.Data;
 

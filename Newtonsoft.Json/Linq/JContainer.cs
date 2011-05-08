@@ -43,9 +43,9 @@ namespace Newtonsoft.Json.Linq
   /// Represents a token that can contain other tokens.
   /// </summary>
   public abstract class JContainer : JToken, IList<JToken> 
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
     , ITypedList, IBindingList
-#elif !(MONODROID || MONOTOUCH)
+#elif !(__ANDROID__ || MONOTOUCH)
         , IList, INotifyCollectionChanged
 #else
         , IList
@@ -54,7 +54,7 @@ namespace Newtonsoft.Json.Linq
     , INotifyCollectionChanged
 #endif
 {
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
     /// <summary>
     /// Occurs when the list changes or an item in the list changes.
     /// </summary>
@@ -108,7 +108,7 @@ namespace Newtonsoft.Json.Linq
         throw new InvalidOperationException("Cannot change {0} during a collection change event.".FormatWith(CultureInfo.InvariantCulture, GetType()));
     }
 
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
     /// <summary>
     /// Raises the <see cref="AddingNew"/> event.
     /// </summary>
@@ -313,7 +313,7 @@ namespace Newtonsoft.Json.Linq
       if (isLast || previous == null)
         _content = item;
 
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
       if (ListChanged != null)
         OnListChanged(new ListChangedEventArgs(ListChangedType.ItemAdded, IndexOfItem(item)));
 #endif
@@ -407,7 +407,7 @@ namespace Newtonsoft.Json.Linq
         {
           token.Remove();
 
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
           OnListChanged(new ListChangedEventArgs(ListChangedType.ItemDeleted, index));
 #endif
 #if !MONOTOUCH && SILVERLIGHT || !(NET20 || NET35)
@@ -454,7 +454,7 @@ namespace Newtonsoft.Json.Linq
       item.Parent = null;
       item.Next = null;
 
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
       OnListChanged(new ListChangedEventArgs(ListChangedType.ItemDeleted, itemIndex));
 #endif
 #if !MONOTOUCH && SILVERLIGHT || !(NET20 || NET35)
@@ -476,7 +476,7 @@ namespace Newtonsoft.Json.Linq
       JToken token = GetItem(index);
       token.Replace(item);
 
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
       OnListChanged(new ListChangedEventArgs(ListChangedType.ItemChanged, index));
 #endif
 #if !MONOTOUCH && SILVERLIGHT || !(NET20 || NET35)
@@ -505,7 +505,7 @@ namespace Newtonsoft.Json.Linq
         next._next = null;
       }
 
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
       OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
 #endif
 #if !MONOTOUCH && SILVERLIGHT || !(NET20 || NET35)
@@ -557,7 +557,7 @@ namespace Newtonsoft.Json.Linq
       existing.Parent = null;
       existing.Next = null;
 
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
       OnListChanged(new ListChangedEventArgs(ListChangedType.ItemChanged, itemIndex));
 #endif
 #if !MONOTOUCH && SILVERLIGHT || !(NET20 || NET35)
@@ -784,7 +784,7 @@ namespace Newtonsoft.Json.Linq
       return hashCode;
     }
 
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
     string ITypedList.GetListName(PropertyDescriptor[] listAccessors)
     {
       return string.Empty;
@@ -964,7 +964,7 @@ namespace Newtonsoft.Json.Linq
 
     #region IBindingList Members
 
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
     void IBindingList.AddIndex(PropertyDescriptor property)
     {
     }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-#if !SILVERLIGHT && !PocketPC && !NET20 && !MONOTOUCH && !MONODROID
+#if !SILVERLIGHT && !PocketPC && !NET20 && !MONOTOUCH && !__ANDROID__
 using System.Data.Linq;
 #endif
-#if !SILVERLIGHT && !MONOTOUCH && !MONODROID
+#if !SILVERLIGHT && !MONOTOUCH && !__ANDROID__
 using System.Data.SqlTypes;
 #endif
 using System.IO;

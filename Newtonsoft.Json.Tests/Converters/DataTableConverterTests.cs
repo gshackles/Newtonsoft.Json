@@ -1,4 +1,4 @@
-﻿#if !(SILVERLIGHT || MONOTOUCH || MONODROID)
+﻿#if !(SILVERLIGHT || MONOTOUCH || __ANDROID__)
 using System;
 using System.Collections.Generic;
 using System.Linq;

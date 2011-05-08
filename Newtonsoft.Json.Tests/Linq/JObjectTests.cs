@@ -10,7 +10,7 @@ using Newtonsoft.Json.Converters;
 using System.IO;
 using System.Collections;
 using System.Collections.Specialized;
-#if !PocketPC && !SILVERLIGHT && !MONOTOUCH && !MONODROID
+#if !PocketPC && !SILVERLIGHT && !MONOTOUCH && !__ANDROID__
 using System.Web.UI;
 #endif
 
@@ -595,7 +595,7 @@ Parameter name: arrayIndex")]
       Assert.AreEqual(p4, l[1]);
     }
 
-#if !PocketPC && !SILVERLIGHT && !NET20 && !MONOTOUCH && !MONODROID
+#if !PocketPC && !SILVERLIGHT && !NET20 && !MONOTOUCH && !__ANDROID__
     [Test]
     public void PropertyChanging()
     {
@@ -1120,7 +1120,7 @@ Parameter name: arrayIndex")]
       l[1] = p3;
     }
 
-#if !(SILVERLIGHT || MONOTOUCH || MONODROID)
+#if !(SILVERLIGHT || MONOTOUCH || __ANDROID__)
     [Test]
     public void IBindingListSortDirection()
     {

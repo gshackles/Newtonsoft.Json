@@ -263,7 +263,7 @@ namespace Newtonsoft.Json.Serialization
       {
         if (_dynamicCodeGeneration == null)
         {
-#if !PocketPC && !SILVERLIGHT && !MONODROID
+#if !PocketPC && !SILVERLIGHT && !__ANDROID__
           try
           {
             new ReflectionPermission(ReflectionPermissionFlag.MemberAccess).Demand();

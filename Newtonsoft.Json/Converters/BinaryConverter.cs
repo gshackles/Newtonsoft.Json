@@ -24,7 +24,7 @@
 #endregion
 
 using System;
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
 using System.Data.SqlTypes;
 #endif
 using System.Globalization;
@@ -69,14 +69,14 @@ namespace Newtonsoft.Json.Converters
 
     private byte[] GetByteArray(object value)
     {
-#if !SILVERLIGHT && !PocketPC && !NET20 && !MONODROID
+#if !SILVERLIGHT && !PocketPC && !NET20 && !__ANDROID__
       if (value.GetType().AssignableToTypeName(BinaryTypeName))
       {
         IBinary binary = DynamicWrapper.CreateWrapper<IBinary>(value);
         return binary.ToArray();
       }
 #endif
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
       if (value is SqlBinary)
         return ((SqlBinary) value).Value;
 #endif
@@ -113,11 +113,11 @@ namespace Newtonsoft.Json.Converters
       string encodedData = reader.Value.ToString();
       byte[] data = Convert.FromBase64String(encodedData);
 
-#if !SILVERLIGHT && !PocketPC && !NET20 && !MONODROID
+#if !SILVERLIGHT && !PocketPC && !NET20 && !__ANDROID__
       if (t.AssignableToTypeName(BinaryTypeName))
         return Activator.CreateInstance(t, data);
 #endif
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
       if (t == typeof(SqlBinary))
         return new SqlBinary(data);
 #endif
@@ -133,11 +133,11 @@ namespace Newtonsoft.Json.Converters
     /// </returns>
     public override bool CanConvert(Type objectType)
     {
-#if !SILVERLIGHT && !PocketPC && !NET20 && !MONODROID
+#if !SILVERLIGHT && !PocketPC && !NET20 && !__ANDROID__
       if (objectType.AssignableToTypeName(BinaryTypeName))
         return true;
 #endif
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
       if (objectType == typeof(SqlBinary) || objectType == typeof(SqlBinary?))
         return true;
 #endif

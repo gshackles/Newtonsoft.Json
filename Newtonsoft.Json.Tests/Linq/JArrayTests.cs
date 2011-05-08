@@ -369,7 +369,7 @@ Parameter name: index")]
     }
 
 
-#if !(SILVERLIGHT || MONOTOUCH || MONODROID)
+#if !(SILVERLIGHT || MONOTOUCH || __ANDROID__)
     [Test]
     public void ITypedListGetItemProperties()
     {

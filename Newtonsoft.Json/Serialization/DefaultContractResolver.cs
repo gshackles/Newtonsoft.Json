@@ -85,7 +85,7 @@ namespace Newtonsoft.Json.Serialization
 #endif
         new BinaryConverter(),
         new KeyValuePairConverter(),
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
         new XmlNodeConverter(),
         new DataSetConverter(),
         new DataTableConverter(),
@@ -206,7 +206,6 @@ namespace Newtonsoft.Json.Serialization
         }
       }	
       
-			}
       return contract;
 #endif
     }

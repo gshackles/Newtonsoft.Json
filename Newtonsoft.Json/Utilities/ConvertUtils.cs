@@ -32,7 +32,7 @@ using System.ComponentModel;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
 
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
 using System.Data.SqlTypes;
 #endif
 
@@ -275,7 +275,7 @@ namespace Newtonsoft.Json.Utilities
         
         throw new Exception("Can not convert null {0} into non-nullable {1}.".FormatWith(CultureInfo.InvariantCulture, initialType, targetType));
       }
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
       if (initialValue is INullable)
         return EnsureTypeAssignable(ToValue((INullable)initialValue), initialType, targetType);
 #endif
@@ -467,7 +467,7 @@ namespace Newtonsoft.Json.Utilities
       throw new Exception("Could not cast or convert from {0} to {1}.".FormatWith(CultureInfo.InvariantCulture, (initialType != null) ? initialType.ToString() : "{null}", targetType));
     }
 
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
     public static object ToValue(INullable nullableValue)
     {
       if (nullableValue == null)

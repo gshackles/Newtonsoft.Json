@@ -48,7 +48,7 @@ namespace Newtonsoft.Json.Linq
 #if !(PocketPC || SILVERLIGHT)
     , ICustomTypeDescriptor
 #endif
-#if !(PocketPC || SILVERLIGHT || NET20 || MONODROID || MONOTOUCH)
+#if !(PocketPC || SILVERLIGHT || NET20 || __ANDROID__ || MONOTOUCH)
     , INotifyPropertyChanging
 #endif
   {
@@ -57,7 +57,7 @@ namespace Newtonsoft.Json.Linq
     /// </summary>
     public event PropertyChangedEventHandler PropertyChanged;
 
-#if !(PocketPC || SILVERLIGHT || NET20 || MONODROID || MONOTOUCH)
+#if !(PocketPC || SILVERLIGHT || NET20 || __ANDROID__ || MONOTOUCH)
     /// <summary>
     /// Occurs when a property value is changing.
     /// </summary>
@@ -124,7 +124,7 @@ namespace Newtonsoft.Json.Linq
     internal void InternalPropertyChanged(JProperty childProperty)
     {
       OnPropertyChanged(childProperty.Name);
-#if !(SILVERLIGHT || MONODROID || MONOTOUCH)
+#if !(SILVERLIGHT || __ANDROID__ || MONOTOUCH)
       OnListChanged(new ListChangedEventArgs(ListChangedType.ItemChanged, IndexOfItem(childProperty)));
 #endif
 #if !MONOTOUCH && SILVERLIGHT || !(NET20 || NET35)
@@ -134,7 +134,7 @@ namespace Newtonsoft.Json.Linq
 
     internal void InternalPropertyChanging(JProperty childProperty)
     {
-#if !PocketPC && !SILVERLIGHT && !NET20 && !MONODROID && !MONOTOUCH
+#if !PocketPC && !SILVERLIGHT && !NET20 && !__ANDROID__ && !MONOTOUCH
       OnPropertyChanging(childProperty.Name);
 #endif
     }
@@ -234,7 +234,7 @@ namespace Newtonsoft.Json.Linq
         }
         else
         {
-#if !PocketPC && !SILVERLIGHT && !NET20 && !MONODROID && !MONOTOUCH
+#if !PocketPC && !SILVERLIGHT && !NET20 && !__ANDROID__ && !MONOTOUCH
           OnPropertyChanging(propertyName);
 #endif
           Add(new JProperty(propertyName, value));
@@ -485,7 +485,7 @@ namespace Newtonsoft.Json.Linq
         PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
     }
 
-#if !PocketPC && !SILVERLIGHT && !NET20 && !MONODROID && !MONOTOUCH
+#if !PocketPC && !SILVERLIGHT && !NET20 && !__ANDROID__ && !MONOTOUCH
     /// <summary>
     /// Raises the <see cref="PropertyChanging"/> event with the provided arguments.
     /// </summary>
